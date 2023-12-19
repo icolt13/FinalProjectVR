@@ -16,25 +16,9 @@ public class KeyboardManager : MonoBehaviour
     private bool isShifted = false;
     private Image shiftButtonImage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
+        instance = this;
         shiftButton.onClick.AddListener(Shifted);
         deleteButton.onClick.AddListener(Delete);
         spaceButton.onClick.AddListener(Space);

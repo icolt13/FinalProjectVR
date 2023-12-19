@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class KeyboardKey : MonoBehaviour
 {
+    public static KeyboardManager instance;
     public string character;
     public string shiftCharacter;
     public TextMeshProUGUI keyLabel;
@@ -28,12 +29,6 @@ public class KeyboardKey : MonoBehaviour
         {
             shiftCharacter = GetShiftCharacter();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private string GetShiftCharacter()
