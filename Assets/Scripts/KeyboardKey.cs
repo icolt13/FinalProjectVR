@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -29,6 +30,13 @@ public class KeyboardKey : MonoBehaviour
         {
             shiftCharacter = GetShiftCharacter();
         }
+    }
+
+    private void Update()
+    {
+        
+        
+        
     }
 
     private string GetShiftCharacter()
@@ -76,13 +84,16 @@ public class KeyboardKey : MonoBehaviour
 
     private void TypeKey()
     {
-        if (isShifted == true)
-        {
-            KeyboardManager.instance.inputField.text += shiftCharacter;
-        }
-        else
-        {
-            KeyboardManager.instance.inputField.text += character;
-        }
+        
+            if (isShifted == true)
+            {
+                KeyboardManager.instance.inputField.text += shiftCharacter;
+            }
+            else
+            {
+                KeyboardManager.instance.inputField.text += character;
+            }
+        
+        
     }
 }
