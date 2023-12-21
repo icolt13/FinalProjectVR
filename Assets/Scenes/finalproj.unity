@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserMaterial: {fileID: 2100000, guid: c7bc4a28366b26649bdeb62a3011e9c4, type: 2}
   lineRenderer: {fileID: 393948015}
-  raycastDistance: 10
+  raycastDistance: 3
   hand: 1
 --- !u!1 &400479197
 GameObject:
@@ -9750,7 +9750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserMaterial: {fileID: 2100000, guid: c7bc4a28366b26649bdeb62a3011e9c4, type: 2}
   lineRenderer: {fileID: 1218243196}
-  raycastDistance: 10
+  raycastDistance: 3
   hand: 0
 --- !u!1 &1220370282
 GameObject:

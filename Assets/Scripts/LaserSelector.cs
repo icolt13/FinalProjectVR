@@ -9,7 +9,7 @@ public class LaserSelector : MonoBehaviour
 {
     public Material laserMaterial;
     public LineRenderer lineRenderer;
-    public float raycastDistance = 10f;
+    public float raycastDistance = 3.5f;
     Boolean triggered = false;
     public enum Hand { LEFT, RIGHT };
     public Hand hand = Hand.RIGHT;
