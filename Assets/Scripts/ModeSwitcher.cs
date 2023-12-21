@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ModeSwitcher : MonoBehaviour
 {
-    private Boolean Pinwheel = true, pressed = false;
+    public static Boolean Pinwheel = true;
+    private bool pressed = false;
     public GameObject LPin, RPin, LCon, RCon, LConAnchor, RConAnchor, Keyboard;
     // Start is called before the first frame update
     void Start()

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Presets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +9,13 @@ public class TextGenAndLPM : MonoBehaviour
 {
     private Boolean pressed = false, game = false;
     private float timeStart;
-    public Text GenText, stats, userInp;
+    public Text GenText, stats, userInp, KeyboardTime, KeyboardAcc, PinwheelTime, PinwheelAcc;
     public int RanChar = 20;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called on  ce per frame
@@ -28,6 +28,7 @@ public class TextGenAndLPM : MonoBehaviour
             stats.text = "DONE";
 
             float acc = 0.0f;
+            decimal seconds;
             for (int i = 0; i < userInp.text.Length; i++)
             {
                 if (userInp.text.Substring(i,1).ToLower().Equals(GenText.text.Substring(i, 1).ToLower()))
@@ -36,11 +37,15 @@ public class TextGenAndLPM : MonoBehaviour
                 }
             }
             acc = Mathf.Round(acc / RanChar * 100.0f);
-            stats.text = "TIME: " + Math.Round((decimal)(Time.time - timeStart), 2).ToString() + " ACCURACY : " + acc.ToString() + "%";
+            seconds = Math.Round((decimal)(Time.time - timeStart), 2);
+            stats.text = "TIME: " + seconds.ToString() + " ACCURACY : " + acc.ToString() + "%";
+            UpdateScoreboard(seconds, acc);
         }
         else if (game)
         {
-            stats.text = "TIME: " + Math.Round((decimal)(Time.time - timeStart), 2).ToString();
+            decimal seconds;
+            seconds = Math.Round((decimal)(Time.time - timeStart), 2);
+            stats.text = "TIME: " + seconds.ToString();
         }
 
         if (OVRInput.Get(OVRInput.Button.Four) && pressed == false)
@@ -56,8 +61,44 @@ public class TextGenAndLPM : MonoBehaviour
             }
 
         }
-        else if (!(OVRInput.Get(OVRInput.Button.Four))) {
+        else if (!OVRInput.Get(OVRInput.Button.Four))
+        {
             pressed = false;
+        }
+    }
+
+    void UpdateScoreboard(decimal newSeconds, float newAcc)
+    {
+        bool pinwheelActive = ModeSwitcher.Pinwheel;
+        if (pinwheelActive)
+        {
+            decimal pinwheelSecValue = Convert.ToDecimal(PinwheelTime.text);
+            float pinwheelAccValue = float.Parse(PinwheelAcc.text);
+
+            if (newAcc > pinwheelAccValue)
+            {
+                PinwheelTime.text = newSeconds.ToString();
+                PinwheelAcc.text = newAcc.ToString();
+            }
+            if ((newAcc == pinwheelAccValue) && newSeconds < pinwheelSecValue)
+            {
+                KeyboardTime.text = newSeconds.ToString();
+            }
+        }
+        else
+        {
+            decimal keyboardSecValue = Convert.ToDecimal(KeyboardTime.text);
+            float keyboardAccValue = float.Parse(KeyboardAcc.text);
+
+            if (newAcc > keyboardAccValue)
+            {
+                KeyboardTime.text = newSeconds.ToString();
+                KeyboardAcc.text = newAcc.ToString();
+            }
+            if ((newAcc == keyboardAccValue) && newSeconds < keyboardSecValue)
+            {
+                KeyboardTime.text = newSeconds.ToString();
+            }
         }
     }
 }
